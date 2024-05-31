@@ -1,26 +1,14 @@
-import { useEffect, useState } from "react"
-import { getRandomCatFact } from "./services/facts"
-import { useCatImage } from "./hooks/useCatImage"
 
-const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
-const CAT_ENDPOINT_IMAGE_URL = 'https://cataas.com/cat/says/'
-
-const useCatFact() => {
-    const [fact, setFact] = useState()
-    useEffect(() => {
-        getRandomCatFact().then(newFact => setFact(newFact))
-    }, [])
-}
+import { useCatImage } from "./hooks/useCatImage.js"
+import { useCatFact } from "./hooks/useCatFact.js"
 
 export function App() {
 
-    const { imageUrl } = useCatImage(fact)
-
-    
+    const { fact, refreshFact } = useCatFact()
+    const { imageUrl } = useCatImage({ fact })
 
     const handleClick = async () => {
-        const newFact = await getRandomCatFact()
-        setFact(newFact)
+        refreshFact()
     }
 
     return (
@@ -34,7 +22,5 @@ export function App() {
                 <img src={imageUrl} alt={`img taken from the first word of ${fact}`} />
             }
         </main>
-
     )
-
 }
