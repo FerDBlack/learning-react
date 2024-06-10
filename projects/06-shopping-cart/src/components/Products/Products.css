@@ -45,3 +45,10 @@
   object-fit: cover;
   background: #fff;
 }
+
+.add-cart-btn{
+  background-color: lightblue;
+}
+.remove-cart-btn{
+  background-color: rgb(91, 47, 47);
+}
