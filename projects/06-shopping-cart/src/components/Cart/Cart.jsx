@@ -3,7 +3,7 @@ import './Cart.css'
 import { CartIcon, ClearCartIcon } from "../Icons/Icons"
 import { useCart } from "../../hooks/useCart/useCart.js"
 
-function CartItem({thumbnail, price, title, quantity, addToCart }) {
+function CartItem({thumbnail, price, title, quantity, addToCart, decreaseToCart }) {
     return (
         <li>
             <img
@@ -17,16 +17,20 @@ function CartItem({thumbnail, price, title, quantity, addToCart }) {
                 <small>
                     qty:{quantity}
                 </small>
+                <div>
                 <button onClick={addToCart}>+</button>
+                <button onClick={decreaseToCart}>-</button>
+                </div>
+                
             </footer>
         </li>
     )
 }
 
 
-export function Cart() {
+export function Cart() { 
     const cartCheckBoxId = useId()
-    const { cart, addToCart, clearCart } = useCart()
+    const { cart, addToCart, decreaseToCart, clearCart } = useCart()
 
     return (
         <>
@@ -41,7 +45,8 @@ export function Cart() {
                             <CartItem
                                 key={product.id}
                                 {...product}
-                                addToCart={() => addToCart(product)} />
+                                addToCart={() => addToCart(product)}
+                                decreaseToCart={()=>decreaseToCart(product)} />
                         ))
 
                     }

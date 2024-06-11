@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { initalState, cartReducer, CART_ACTION_TYPES } from '../../reducers/cart.js'
+import { cartInitialState, cartReducer, CART_ACTION_TYPES } from '../../reducers/cart.js'
 export const CartContext = createContext()
 
 function useCartReducer() {
@@ -10,6 +10,12 @@ function useCartReducer() {
         payload: product
     })
 
+    const decreaseToCart = product => dispatch({
+        type: CART_ACTION_TYPES.DECREASE_TO_CART,
+        payload: product
+    })
+
+
     const removeFromCart = product => dispatch({
         type: CART_ACTION_TYPES.REMOVE_FROM_CART,
         payload: product
@@ -19,18 +25,19 @@ function useCartReducer() {
         type: CART_ACTION_TYPES.CLEAR_CART
     })
 
-    return { state, addToCart, removeFromCart, clearCart }
+    return { state, addToCart, decreaseToCart, removeFromCart, clearCart }
 }
 
 export function CartProvider({ children }) {
 
-    const { state, addToCart, removeFromCart, clearCart } = useCartReducer()
+    const { state, addToCart, decreaseToCart, removeFromCart, clearCart } = useCartReducer()
 
 
     return (
         <CartContext.Provider value={{
             cart: state,
             addToCart,
+            decreaseToCart,
             removeFromCart,
             clearCart
         }}>

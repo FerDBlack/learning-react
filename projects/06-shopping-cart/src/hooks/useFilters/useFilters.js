@@ -17,7 +17,6 @@ export function useFilters() {
             )
         })
     }
-    console.log(filters);
 
     return { filters, filterProducts, setFilters }
 }

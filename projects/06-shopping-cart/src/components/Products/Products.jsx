@@ -4,7 +4,7 @@ import { useCart } from '../../hooks/useCart/useCart.js'
 
 
 export function Products({ products }) {
-    const { cart, addToCart, removeFromCart, clearCart } = useCart()
+    const { cart, addToCart, removeFromCart } = useCart()
 
     const checkPorductInCart = product => {
         return cart.some(item => item.id === product.id)
