@@ -19,7 +19,8 @@ const UPDATE_STATE_BY_ACTION = {
 
         if (productInCartIndex >= 0) {
             const newState = structuredClone(state)
-            newState[productInCartIndex].quantity += 1
+            const product = newState[productInCartIndex];
+            product.quantity += 1
             updateLocalStorage(newState)
             return newState
         }
